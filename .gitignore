@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+.netrwhist
+*~
+*.swp
+*.pyc
+vim/view
+vim/bundle
