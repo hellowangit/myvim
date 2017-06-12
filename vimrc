@@ -44,6 +44,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils' " for snipmate
 Plugin 'tomtom/tlib_vim' " for snipmate
 Plugin 'garbas/vim-snipmate' " snipmate
 Plugin 'aperezdc/vim-template'
+Plugin 'itchyny/lightline.vim'
 
 
 " ===================================安装插件=================================
@@ -57,7 +58,7 @@ endif
 
 " ===================================用户配置=================================
 let mapleader=','
-set guifont=hack:h13
+set guifont=monaco:h13
 colorscheme jellybeans
 set fenc=utf-8
 set encoding=utf-8
@@ -107,10 +108,11 @@ nnoremap <C-h> <C-w>h
 
 nnoremap ,cd :cd %:p:h<cr>:pwd<cr>
 
-" powerline
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+" for Plugin 'itchyny/lightline.vim'
+if !has('gui_running')
+    set t_Co=256
+endif
+
 
 filetype on
 filetype plugin on
