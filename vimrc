@@ -36,8 +36,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'nanotech/jellybeans.vim' " 主题
 Plugin 'delek.vim' "备用主题
 Plugin 'shawncplus/phpcomplete.vim'  " PHP自动补全
-Plugin 'mattn/calendar-vim' " 日历
-Plugin 'vimwiki/vimwiki' " 个人wiki
 Plugin 'vim-scripts/VOoM'
 Plugin 'kannokanno/previm' 
 Plugin 'MarcWeber/vim-addon-mw-utils' " for snipmate
@@ -145,7 +143,6 @@ if has('autocmd') && !exists('autocommands_loaded')
     autocmd BufNewFile,BufRead *.ejs set filetype=html
     autocmd BufNewFile,BufRead *.ino set filetype=c
     autocmd BufNewFile,BufRead *.svg set filetype=xml
-    autocmd! BufEnter * call CheckForCustomConfiguration()
 
     autocmd BufRead,BufNewFile *.html set fdm=indent 
     autocmd BufRead,BufNewFile Gruntfile set ft=javascript
@@ -165,31 +162,6 @@ let NERDTreeQuitOnOpen=0
 
 nnoremap tl :TagbarToggle<CR>
 let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
-
-" VimWiki
-let g:vimwiki_menu = ''
-let g:vimwiki_hl_cb_checked = 1
-let g:vimwiki_w32_dir_enc = 'utf-8'
-let g:vimwiki_use_mouse = 1
-let g:vimwiki_camel_case = 0
-let g:vimwiki_valid_html_tags='font,b,i,s,u,sub,sup,kbd,br,hr,div,del,code,red,center,left,right,pre'
-
-let wiki_main = {}
-let wiki_root = '~/Documents/vimwiki/'
-let wiki_main.path = wiki_root . 'wiki/'
-let wiki_main.path_html = wiki_root . 'html/'
-let wiki_main.template_path = wiki_root . 'template/'
-let wiki_main.template_default = 'tpl'
-let wiki_main.template_ext = '.html'
-let wiki_main.auto_export = 0
-" vimwiki在vim中代码高亮显示 
-" 'js':'javascript' js是别名,用在 calss='brush: js' , javascript是vim的语法
-" 着色文件 配合SyntaxHighlighter
-" http://alexgorbatchev.com/SyntaxHighlighter/manual/brushes/ 非常完美，既能在
-" vim中代码高亮，也能再html中代码高亮
-let wiki_main.nested_syntaxes = {'sql': 'sql', 'html': 'html', 'css': 'css', 'js': 'javascript', 'vim' : 'vim', 'py':'python'}
-
-let g:vimwiki_list = [wiki_main]
 
 " NERD_Commenter
 let NERDSpaceDelims = 1
@@ -248,14 +220,3 @@ let g:bufExplorerDisableDefaultKeyMapping=1    " Disable mapping.
 
 " for acl in tmux
 set shellpipe=>
-
-au BufNewFile,BufRead *.c call CheckForCustomConfiguration()
-
-" 加载当前项目下的指定配置
-function! CheckForCustomConfiguration()
-    " Check for .vim.custom in the directory containing the newly opened file
-    let custom_config_file = expand('%:p:h') . '/.vim.custom'
-    if filereadable(custom_config_file)
-        exe 'source' custom_config_file
-    endif
-endfunction
